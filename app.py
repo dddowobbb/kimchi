@@ -16,8 +16,13 @@ df_kospi['날짜'] = pd.to_datetime(df_kospi['날짜'])
 # 병합
 df = pd.merge(df_exchange, df_kospi, on='날짜', how='inner')
 
-# 컬럼명 정리 (예시: 'USD/KRW', 'KOSPI')
-df.columns = ['날짜', 'Exchange', 'KOSPI']
+# 컬럼명 확인 (디버깅용)
+st.write("병합 후 컬럼명:", df.columns)
+
+# 컬럼명 정리 (예: '날짜', 'Exchange', 'KOSPI')
+# 컬럼 수가 맞지 않으면 오류가 납니다.
+# 문제 확인 후에 아래 코드 주석 해제해서 사용하세요.
+# df.columns = ['날짜', 'Exchange', 'KOSPI']
 
 # 인터페이스
 st.title("원/달러 환율과 코스피 지수의 관계 분석")
