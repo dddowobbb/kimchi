@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.graph_objs as go
 
 # 데이터 불러오기
-url_exchange = 'https://raw.githubusercontent.com/dddowobbb/kimchi/main/USD_KRW%20%EA%B3%BC%EA%B1%B0%20%EB%8D%B0%EC%9D%B4%ED%84%B0.csv'
-url_kospi = 'https://raw.githubusercontent.com/dddowobbb/kimchi/main/kospi.csv'
+url_exchange = "https://raw.githubusercontent.com/dddowobbb/kimchi/main/USD_KRW.csv"
+url_kospi = "https://raw.githubusercontent.com/dddowobbb/kimchi/main/kospi.csv"
 
 df_exchange = pd.read_csv(url_exchange)
 df_kospi = pd.read_csv(url_kospi)
