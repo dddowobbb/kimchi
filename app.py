@@ -9,20 +9,24 @@ url_kospi = "https://raw.githubusercontent.com/dddowobbb/kimchi/main/kospi.csv"
 df_exchange = pd.read_csv(url_exchange)
 df_kospi = pd.read_csv(url_kospi)
 
-# 날짜 포맷 정리
+# 칼럼 개수 및 이름 출력 (디버깅용)
+st.write("=== Exchange 데이터 ===")
+st.write("칼럼 개수:", len(df_exchange.columns))
+st.write("칼럼명:", df_exchange.columns.tolist())
+
+st.write("=== Kospi 데이터 ===")
+st.write("칼럼 개수:", len(df_kospi.columns))
+st.write("칼럼명:", df_kospi.columns.tolist())
+
+# 날짜 포맷 정리 (데이터 파일에서 '날짜' 컬럼명이므로 맞춰줌)
 df_exchange['날짜'] = pd.to_datetime(df_exchange['날짜'])
 df_kospi['날짜'] = pd.to_datetime(df_kospi['날짜'])
 
 # 병합
 df = pd.merge(df_exchange, df_kospi, on='날짜', how='inner')
 
-# 컬럼명 확인 (디버깅용)
-st.write("병합 후 컬럼명:", df.columns)
-
-# 컬럼명 정리 (예: '날짜', 'Exchange', 'KOSPI')
-# 컬럼 수가 맞지 않으면 오류가 납니다.
-# 문제 확인 후에 아래 코드 주석 해제해서 사용하세요.
-# df.columns = ['날짜', 'Exchange', 'KOSPI']
+# 컬럼명 정리 (병합 후 컬럼명)
+df.columns = ['날짜', 'Exchange', 'KOSPI']
 
 # 인터페이스
 st.title("원/달러 환율과 코스피 지수의 관계 분석")
