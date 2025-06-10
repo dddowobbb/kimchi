@@ -10,29 +10,29 @@ df_exchange = pd.read_csv(url_exchange)
 df_kospi = pd.read_csv(url_kospi)
 
 # 날짜 포맷 정리
-df_exchange['Date'] = pd.to_datetime(df_exchange['Date'])
-df_kospi['Date'] = pd.to_datetime(df_kospi['Date'])
+df_exchange['날짜'] = pd.to_datetime(df_exchange['날짜'])
+df_kospi['날짜'] = pd.to_datetime(df_kospi['날짜'])
 
 # 병합
-df = pd.merge(df_exchange, df_kospi, on='Date', how='inner')
+df = pd.merge(df_exchange, df_kospi, on='날짜', how='inner')
 
 # 컬럼명 정리 (예시: 'USD/KRW', 'KOSPI')
-df.columns = ['Date', 'Exchange', 'KOSPI']
+df.columns = ['날짜', 'Exchange', 'KOSPI']
 
 # 인터페이스
 st.title("원/달러 환율과 코스피 지수의 관계 분석")
 
 # 날짜 선택
-start_date = st.date_input("시작 날짜", df['Date'].min().date())
-end_date = st.date_input("종료 날짜", df['Date'].max().date())
+start_date = st.date_input("시작 날짜", df['날짜'].min().date())
+end_date = st.date_input("종료 날짜", df['날짜'].max().date())
 
 # 날짜 필터링
-df_filtered = df[(df['Date'] >= pd.to_datetime(start_date)) & (df['Date'] <= pd.to_datetime(end_date))]
+df_filtered = df[(df['날짜'] >= pd.to_datetime(start_date)) & (df['날짜'] <= pd.to_datetime(end_date))]
 
 # 시각화
 fig = go.Figure()
-fig.add_trace(go.Scatter(x=df_filtered['Date'], y=df_filtered['Exchange'], name='USD/KRW 환율', yaxis='y1'))
-fig.add_trace(go.Scatter(x=df_filtered['Date'], y=df_filtered['KOSPI'], name='KOSPI 지수', yaxis='y2'))
+fig.add_trace(go.Scatter(x=df_filtered['날짜'], y=df_filtered['Exchange'], name='USD/KRW 환율', yaxis='y1'))
+fig.add_trace(go.Scatter(x=df_filtered['날짜'], y=df_filtered['KOSPI'], name='KOSPI 지수', yaxis='y2'))
 
 # 이중 y축
 fig.update_layout(
