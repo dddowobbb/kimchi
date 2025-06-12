@@ -9,13 +9,6 @@ url_kospi = "https://raw.githubusercontent.com/dddowobbb/kimchi/main/kospi.csv"
 df_exchange = pd.read_csv(url_exchange)
 df_kospi = pd.read_csv(url_kospi)
 
-# 칼럼 정보 출력
-st.write("=== Exchange 데이터 ===")
-st.write("칼럼 개수:", len(df_exchange.columns))
-st.write("칼럼명:", list(df_exchange.columns))
-st.write("=== Kospi 데이터 ===")
-st.write("칼럼 개수:", len(df_kospi.columns))
-st.write("칼럼명:", list(df_kospi.columns))
 
 # 필요한 칼럼만 선택
 df_exchange = df_exchange[['날짜', '종가']]
